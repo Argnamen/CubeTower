@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65c562c505bad1748a5c4421c66cc359, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: 
+  cubeCount: 20
+  cubeColors:
+  - serializedVersion: 2
+    rgba: 4278192895
+  - serializedVersion: 2
+    rgba: 4278221823
+  - serializedVersion: 2
+    rgba: 4278253055
+  - serializedVersion: 2
+    rgba: 4278255525
+  - serializedVersion: 2
+    rgba: 4278255380
+  - serializedVersion: 2
+    rgba: 4290117376
+  - serializedVersion: 2
+    rgba: 4294941440
+  - serializedVersion: 2
+    rgba: 4294915840
+  - serializedVersion: 2
+    rgba: 4294901849
+  - serializedVersion: 2
+    rgba: 4294901927
+  - serializedVersion: 2
+    rgba: 4294574335
+  - serializedVersion: 2
+    rgba: 4284678399
+  - serializedVersion: 2
+    rgba: 4294967295
+  - serializedVersion: 2
+    rgba: 4278190080
+  - serializedVersion: 2
+    rgba: 4283133331
+  - serializedVersion: 2
+    rgba: 4287253397
+  - serializedVersion: 2
+    rgba: 4283979935
+  - serializedVersion: 2
+    rgba: 4287730002
+  - serializedVersion: 2
+    rgba: 4283599949
+  - serializedVersion: 2
+    rgba: 4287072135
