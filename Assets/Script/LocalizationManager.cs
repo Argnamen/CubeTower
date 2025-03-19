@@ -1,15 +1,15 @@
 public class LocalizationManager : ILocalizationManager
 {
-    private readonly IGameConfig _gameConfig;
+    private readonly LocalizationConfig _config;
 
-    public LocalizationManager(IGameConfig gameConfig)
+    public LocalizationManager(LocalizationConfig config)
     {
-        _gameConfig = gameConfig;
+        _config = config;
     }
 
     public string GetLocalizedText(string key)
     {
-        var localization = _gameConfig.Localization.Find(x => x.Key == key);
+        var localization = _config.Localization.Find(x => x.Key == key);
         return localization?.RUS ?? string.Empty;
     }
 }
