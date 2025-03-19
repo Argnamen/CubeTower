@@ -12,4 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: LocalizationConfig
   m_EditorClassIdentifier: Assembly-CSharp::LocalizationConfig
-  Localization: []
+  Localization:
+  - Key: IN_TOWER
+    ENG: 
+    RUS: "\u041A\u0443\u0431\u0438\u043A \u043D\u0430 \u0431\u0430\u0448\u043D\u0435"
+  - Key: IN_HOLE
+    ENG: 
+    RUS: "\u041A\u0443\u0431\u0438\u043A \u0443\u043D\u0438\u0447\u0442\u043E\u0436\u0435\u043D"
+  - Key: TOWER_HEIGHT
+    ENG: 
+    RUS: "\u0411\u0430\u0448\u043D\u044F \u0441\u043B\u0438\u0448\u043A\u043E\u043C
+      \u0432\u044B\u0441\u043E\u043A\u0430\u044F"
+  - Key: MISSED
+    ENG: 
+    RUS: "\u041A\u0443\u0431\u0438\u043A \u043D\u0435 \u043F\u043E\u0441\u0442\u0430\u0432\u0438\u0442\u044C"
+  - Key: NULL
+    ENG: 
+    RUS: "\u0412\u043E\u0437\u044C\u043C\u0438 \u043A\u0443\u0431\u0438\u043A"
