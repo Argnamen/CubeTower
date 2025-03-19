@@ -6,4 +6,7 @@ public class CubeHierechy: MonoBehaviour
 {
     public Transform Transform;
     public SpriteRenderer SpriteRenderer;
+
+    public Vector2 StartPosition;
+    public Color32 Color;
 }

@@ -5,15 +5,16 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 {
     public bool OnTower = false;
 
+    public CubeHierechy Hierechy;
+
     public delegate void DropEvent(GameObject cube, Vector2 dropPosition);
     public event DropEvent OnDrop;
 
-    private Vector2 startPosition;
     private Transform parentTransform;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        startPosition = transform.position;
+        Hierechy.StartPosition = transform.position;
         parentTransform = transform.parent;
         transform.SetParent(transform.root);
     }
@@ -29,7 +30,6 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if (transform.parent == parentTransform.root)
         {
             transform.SetParent(parentTransform);
-            transform.position = startPosition;
         }
     }
 }
