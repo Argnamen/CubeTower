@@ -30,6 +30,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
         if (transform.parent == parentTransform.root)
         {
             transform.SetParent(parentTransform);
+            transform.SetSiblingIndex(Hierechy.ChildIndex);
         }
     }
 }
