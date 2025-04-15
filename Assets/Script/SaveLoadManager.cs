@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class SaveLoadManager
 {
-    private List<GameObject> _towerCubes = new List<GameObject>();
-    public void Save(GameObject[] towerCubes)
+    private List<CubeHierechy> _towerCubes = new List<CubeHierechy>();
+    public void Save(CubeHierechy[] towerCubes)
     {
         TowerSaveData saveData = new TowerSaveData();
 
@@ -14,15 +14,14 @@ public class SaveLoadManager
 
         foreach (var cube in _towerCubes)
         {
-            CubeHierechy cubeHierechy = cube.GetComponent<CubeHierechy>();
             CubeSaveData cubeData = new CubeSaveData
             {
-                PositionX = cubeHierechy.NextPosition.x,
-                PositionY = cubeHierechy.NextPosition.y,
-                ColorR = cubeHierechy.Color.r,
-                ColorG = cubeHierechy.Color.g,
-                ColorB = cubeHierechy.Color.b,
-                ColorA = cubeHierechy.Color.a
+                PositionX = cube.NextPosition.x,
+                PositionY = cube.NextPosition.y,
+                ColorR = cube.Color.r,
+                ColorG = cube.Color.g,
+                ColorB = cube.Color.b,
+                ColorA = cube.Color.a
             };
 
             Debug.Log(cubeData.PositionX + " " + cubeData.PositionY);
@@ -35,7 +34,7 @@ public class SaveLoadManager
         PlayerPrefs.Save();
     }
 
-    public GameObject[] Load(Transform parent, ICubeFactory cubeFactory)
+    public CubeHierechy[] Load(Transform parent, ICubeFactory cubeFactory)
     {
         if (PlayerPrefs.HasKey("TowerSaveData"))
         {
@@ -45,12 +44,12 @@ public class SaveLoadManager
             foreach (var cubeData in saveData.Cubes)
             {
                 Color32 color = new Color32(cubeData.ColorR, cubeData.ColorG, cubeData.ColorB, cubeData.ColorA);
-                GameObject cube = cubeFactory.CreateCube(parent, color);
+                CubeHierechy cube = cubeFactory.CreateCube(parent, color);
                 cube.transform.position = new Vector3(cubeData.PositionX, cubeData.PositionY, 0);
 
-                cube.GetComponent<DragHandler>().OnTower = true;
-                cube.GetComponent<CubeHierechy>().Color = color;
-                cube.GetComponent<CubeHierechy>().NextPosition = new Vector2(cubeData.PositionX, cubeData.PositionY);
+                cube.OnTower = true;
+                cube.Color = color;
+                cube.NextPosition = new Vector2(cubeData.PositionX, cubeData.PositionY);
 
                 _towerCubes.Add(cube);
             }

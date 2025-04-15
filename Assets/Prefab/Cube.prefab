@@ -51,12 +51,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3f5c149a74eafb4e9152d7a69063493, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ChildIndex: 0
   Transform: {fileID: 8666760108508525981}
   SpriteRenderer: {fileID: 0}
   StartPosition: {x: 0, y: 0}
   Color:
     serializedVersion: 2
     rgba: 0
+  NextPosition: {x: 0, y: 0}
+  DragHandler: {fileID: 5269885045411363959}
+  OnTower: 0
 --- !u!114 &5269885045411363959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69,7 +73,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7f2fe4a4b958e849985fdfbbc01d6bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnTower: 0
   Hierechy: {fileID: 2135689989948580175}
 --- !u!222 &7603056926411066215
 CanvasRenderer:

@@ -7,7 +7,7 @@ using UnityEngine.UIElements;
 
 public class TowerManager : ITowerManager
 {
-    private List<GameObject> _towerCubes = new List<GameObject>();
+    private List<CubeHierechy> _towerCubes = new List<CubeHierechy>();
 
     private readonly float _cubeSize;
     private readonly float _screenTopY;
@@ -31,9 +31,9 @@ public class TowerManager : ITowerManager
         _saveLoadManager.Save(_towerCubes.ToArray());
     }
 
-    public GameObject[] LoadTower(Transform parent, ICubeFactory cubeFactory)
+    public CubeHierechy[] LoadTower(Transform parent, ICubeFactory cubeFactory)
     {
-        GameObject[] loadCubes = _saveLoadManager.Load(parent, cubeFactory);
+        CubeHierechy[] loadCubes = _saveLoadManager.Load(parent, cubeFactory);
 
         if (loadCubes != null)
         {
@@ -41,8 +41,8 @@ public class TowerManager : ITowerManager
 
             for(int i = 0; i < _towerCubes.Count; i++)
             {
-                _towerCubes[i].GetComponent<CubeHierechy>().Color = loadCubes[i].GetComponent<CubeHierechy>().Color;
-                _towerCubes[i].GetComponent<CubeHierechy>().NextPosition = loadCubes[i].GetComponent<CubeHierechy>().NextPosition;
+                _towerCubes[i].Color = loadCubes[i].Color;
+                _towerCubes[i].NextPosition = loadCubes[i].NextPosition;
             }
 
             return _towerCubes.ToArray();
@@ -51,12 +51,12 @@ public class TowerManager : ITowerManager
             return null;
     }
 
-    public void AddToTower(GameObject cube)
+    public void AddToTower(CubeHierechy cube)
     {
         Vector3 position = _towerCubes.Count == 0 ? _uiView.TowerArea.position : _towerCubes[_towerCubes.Count - 1].transform.position;
         position += Vector3.up * _cubeSize;
         position += Vector3.right * Random.Range(-_cubeSize / 2, _cubeSize / 2);
-        cube.GetComponent<CubeHierechy>().NextPosition = position;
+        cube.NextPosition = position;
 
         _towerCubes.Add(cube);
 
@@ -66,7 +66,7 @@ public class TowerManager : ITowerManager
         SaveTower();
     }
 
-    public void RemoveFromTower(GameObject cube)
+    public void RemoveFromTower(CubeHierechy cube)
     {
         int index = _towerCubes.IndexOf(cube);
 
@@ -92,7 +92,7 @@ public class TowerManager : ITowerManager
                 {
                     _towerCubes[i].transform.DOMove(targetPosition, 0.3f).SetEase(Ease.OutQuad);
 
-                    _towerCubes[i].GetComponent<CubeHierechy>().NextPosition = targetPosition;
+                    _towerCubes[i].NextPosition = targetPosition;
 
                     SaveTower();
                 }

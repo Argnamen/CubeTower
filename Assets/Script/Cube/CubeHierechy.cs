@@ -13,4 +13,8 @@ public class CubeHierechy: MonoBehaviour
     public Color32 Color;
 
     public Vector2 NextPosition;
+
+    public DragHandler DragHandler;
+
+    public bool OnTower = false;
 }

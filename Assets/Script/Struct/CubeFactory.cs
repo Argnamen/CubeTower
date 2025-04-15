@@ -10,10 +10,10 @@ public class CubeFactory : ICubeFactory
         _cubePrefab = cubePrefab;
     }
 
-    public GameObject CreateCube(Transform parent, Color32 color)
+    public CubeHierechy CreateCube(Transform parent, Color32 color)
     {
         GameObject cube = Object.Instantiate(_cubePrefab, parent);
         cube.GetComponent<Image>().color = color;
-        return cube;
+        return cube.GetComponent<CubeHierechy>();
     }
 }

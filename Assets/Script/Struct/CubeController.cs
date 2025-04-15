@@ -28,13 +28,13 @@ public class CubeController : MonoBehaviour
 
     private void LoadGame()
     {
-        GameObject[] cubes = _towerManager.LoadTower(_uIView.TowerContainer, _cubeFactory);
+        CubeHierechy[] cubes = _towerManager.LoadTower(_uIView.TowerContainer, _cubeFactory);
 
         if (cubes != null)
         {
-            foreach (GameObject cube in cubes)
+            foreach (var cube in cubes)
             {
-                cube.GetComponent<DragHandler>().OnDrop += OnCubeDropped;
+                cube.DragHandler.AddDropEvent(OnCubeDropped);
             }
         }
     }
@@ -43,29 +43,29 @@ public class CubeController : MonoBehaviour
     {
         for (int i = 0; i < _cubeCount; i++)
         {
-            GameObject cube = _cubeFactory.CreateCube(_uIView.BottomPanel, _cubeColors[i]);
-            cube.GetComponent<DragHandler>().OnDrop += OnCubeDropped;
-            cube.GetComponent<CubeHierechy>().Color = _cubeColors[i];
-            cube.GetComponent<CubeHierechy>().ChildIndex = i;
+            CubeHierechy cube = _cubeFactory.CreateCube(_uIView.BottomPanel, _cubeColors[i]);
+            cube.DragHandler.AddDropEvent(OnCubeDropped);
+            cube.Color = _cubeColors[i];
+            cube.ChildIndex = i;
         }
     }
 
-    private void OnCubeDropped(GameObject cube, Vector2 dropPosition)
+    private void OnCubeDropped(CubeHierechy cube, Vector2 dropPosition)
     {
         var cloneCube = cube;
 
         _stateManager.UpdateState(TowerState.Null);
 
-        if (!cube.GetComponent<DragHandler>().OnTower)
+        if (!cube.OnTower)
         {
-            cloneCube = _cubeFactory.CreateCube(_uIView.TowerContainer, cube.GetComponent<CubeHierechy>().Color);
-            cloneCube.GetComponent<DragHandler>().OnTower = true;
-            cloneCube.GetComponent<DragHandler>().OnDrop += OnCubeDropped;
-            cloneCube.GetComponent<CubeHierechy>().Color = cube.GetComponent<CubeHierechy>().Color;
+            cloneCube = _cubeFactory.CreateCube(_uIView.TowerContainer, cube.Color);
+            cloneCube.OnTower = true;
+            cloneCube.DragHandler.AddDropEvent(OnCubeDropped);
+            cloneCube.Color = cube.Color;
         }
         else if (!RectTransformUtility.RectangleContainsScreenPoint(_uIView.HoleArea, dropPosition))
         {
-            cube.transform.position = cube.GetComponent<DragHandler>().Hierechy.StartPosition;
+            cube.transform.position = cube.StartPosition;
             return;
         }
         
@@ -77,7 +77,7 @@ public class CubeController : MonoBehaviour
         }
         else
         {
-            if (!cube.GetComponent<DragHandler>().OnTower)
+            if (!cube.OnTower)
             {
                 cloneCube.transform.position = dropPosition;
                 cloneCube.transform.DOScale(Vector3.zero, 0.3f).OnComplete(() => Object.Destroy(cloneCube));

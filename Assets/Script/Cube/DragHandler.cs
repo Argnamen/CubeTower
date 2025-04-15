@@ -1,16 +1,25 @@
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    public bool OnTower = false;
+    [SerializeField] private CubeHierechy Hierechy;
 
-    public CubeHierechy Hierechy;
-
-    public delegate void DropEvent(GameObject cube, Vector2 dropPosition);
-    public event DropEvent OnDrop;
+    public delegate void DropEvent(CubeHierechy cube, Vector2 dropPosition);
+    [SerializeField] private event DropEvent OnDrop;
 
     private Transform parentTransform;
+
+    public void AddDropEvent(DropEvent action)
+    {
+        OnDrop += action;
+    }
+
+    public void RemoveDropEvent(DropEvent action)
+    {
+        OnDrop -= action;
+    }
 
     public void OnBeginDrag(PointerEventData eventData)
     {
@@ -26,7 +35,7 @@ public class DragHandler : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        OnDrop?.Invoke(gameObject, eventData.position);
+        OnDrop?.Invoke(Hierechy, eventData.position);
         if (transform.parent == parentTransform.root)
         {
             transform.SetParent(parentTransform);
